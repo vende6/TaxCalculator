@@ -14,7 +14,7 @@ tx.SetCustomTaxRate(Commodity.Food, 9);
 foreach (var kvp in TaxCalculator._customRates)
 {
     if(kvp!=null)
-    Console.WriteLine("Key = [0], Value = {1},  Value = {2}", kvp.Item1, kvp.Item2, kvp.Item3);
+    Console.WriteLine("Commodity = [0], Date = {1},  Rate = {2}", kvp.Item1, kvp.Item2, kvp.Item3);
 }
 
 var taxvalue = tx.GetTaxRateForDateTime(Commodity.Literature, DateTime.Now);
