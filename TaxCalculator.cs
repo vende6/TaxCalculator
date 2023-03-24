@@ -62,8 +62,11 @@ namespace TaxCalculatorInterviewTests
         {
             //TODO: support saving multiple custom rates for different combinations of Commodity/DateTime
             //TODO: make sure we never save duplicates, in case of e.g. clock resets, DST etc - overwrite old values if this happens
+            if ((_customRates.Where(x => x.Key == commodity && x.Value.Item1 == DateTime.Now)).Any())
+            {
+                return;
+            }
             _customRates[commodity] = Tuple.Create(DateTime.Now, rate);
-
         }
         public static Dictionary<Commodity, Tuple<DateTime, double>> _customRates = new Dictionary<Commodity, Tuple<DateTime, double>>(); //set rate :: regular stuff
 
@@ -75,10 +78,16 @@ namespace TaxCalculatorInterviewTests
         /// </summary>
         public double GetTaxRateForDateTime(Commodity commodity, DateTime date)
         {
-            //TODO: implement
-            //_customRates[commodity] = Tuple.Create(DateTime.Now, rate);
-            var customTaxRates = _customRates.FirstOrDefault(x => x.Key == commodity);
-            return customTaxRates.Value.Item2;
+            for (var x = 0; x <= _customRates.Where(x => x.Key == commodity && x.Value.Item1 == date).Count(); x++)
+            {
+                var item = _customRates.ElementAtOrDefault(x);
+                var next = _customRates.ElementAtOrDefault(x + 1);
+                if (item.Value.Item1 >= DateTime.Now && item.Value.Item1 <= next.Value.Item1)
+                {
+                    return item.Value.Item2;
+                }
+            }
+            return GetStandardTaxRate(commodity);
         }
 
         /// <summary>
@@ -88,9 +97,6 @@ namespace TaxCalculatorInterviewTests
         /// </summary>
         public double GetCurrentTaxRate(Commodity commodity)
         {
-            //TODO: implement
-            //throw new NotImplementedException()
-            
             for (var x = 0; x <= _customRates.Where(x => x.Key == commodity).Count(); x++)
             {
                 var item = _customRates.ElementAtOrDefault(x);
@@ -104,8 +110,6 @@ namespace TaxCalculatorInterviewTests
         }
         static void Main(string[] args)
         {
-            // Display the number of command line arguments.
-
             Console.WriteLine(args.Length);
         }
 
