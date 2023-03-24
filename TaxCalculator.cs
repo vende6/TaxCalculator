@@ -67,7 +67,7 @@ namespace TaxCalculatorInterviewTests
             //    return;
             //}
             int i = (int)commodity;
-            _customRates[0] = new Tuple<Commodity,DateTime,double>(commodity, DateTime.Now, rate);
+            _customRates[i] = new Tuple<Commodity,DateTime,double>(commodity, DateTime.Now, rate);
         }
         public static Tuple<Commodity, DateTime, double>[] _customRates = new Tuple<Commodity, DateTime, double>[6];
 

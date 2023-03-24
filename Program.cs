@@ -7,10 +7,10 @@ tx.SetCustomTaxRate(Commodity.Literature, 5);
 tx.SetCustomTaxRate(Commodity.Literature, 6);
 tx.SetCustomTaxRate(Commodity.CulturalServices, 10);
 
-foreach (var kvp in TaxCalculator._customRates)
-{
-    Console.WriteLine("Key = [0], Value = {1},  Value = {2}", kvp.Item1, kvp.Item2, kvp.Item3);
-}
+//foreach (var kvp in TaxCalculator._customRates)
+//{
+//    Console.WriteLine("Key = [0], Value = {1},  Value = {2}", kvp.Item1, kvp.Item2, kvp.Item3);
+//}
 
 var taxvalue = tx.GetTaxRateForDateTime(Commodity.Literature, DateTime.Now);
 
