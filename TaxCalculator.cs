@@ -62,13 +62,14 @@ namespace TaxCalculatorInterviewTests
         {
             //TODO: support saving multiple custom rates for different combinations of Commodity/DateTime
             //TODO: make sure we never save duplicates, in case of e.g. clock resets, DST etc - overwrite old values if this happens
-            if ((_customRates.Where(x => x.Key == commodity && x.Value.Item1 == DateTime.Now)).Any())
+            if ((_customRates.Where(x => x.Item1 == commodity && x.Item2 == DateTime.Now)).Any())
             {
                 return;
             }
-            _customRates[commodity] = Tuple.Create(DateTime.Now, rate);
+            int i = (int)commodity;
+            _customRates[i] = Tuple.Create(commodity, DateTime.Now, rate);
         }
-        public static Dictionary<Commodity, Tuple<DateTime, double>> _customRates = new Dictionary<Commodity, Tuple<DateTime, double>>(); //set rate :: regular stuff
+        public static Tuple<Commodity, DateTime, double>[] _customRates = new Tuple<Commodity, DateTime, double>[6];
 
 
         /// <summary>
