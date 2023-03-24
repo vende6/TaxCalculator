@@ -98,13 +98,13 @@ namespace TaxCalculatorInterviewTests
         /// </summary>
         public double GetCurrentTaxRate(Commodity commodity)
         {
-            for (var x = 0; x <= _customRates.Where(x => x.Key == commodity).Count(); x++)
+            for (var x = 0; x <= _customRates.Where(x => x.Item1 == commodity).Count(); x++)
             {
                 var item = _customRates.ElementAtOrDefault(x);
                 var next = _customRates.ElementAtOrDefault(x + 1);
-                if (item.Value.Item1 >= DateTime.Now && item.Value.Item1 <= next.Value.Item1)
+                if (item.Item2 >= DateTime.Now && item.Item1 <= next.Item1)
                 {
-                    return item.Value.Item2;
+                    return item.Item3;
                 }
             }
             return GetStandardTaxRate(commodity);
