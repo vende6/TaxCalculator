@@ -3,8 +3,12 @@ using TaxCalculatorInterviewTests;
 
 TaxCalculator tx = new TaxCalculator();
 
-tx.SetCustomTaxRate(Commodity.Literature, 5);
-tx.SetCustomTaxRate(Commodity.Literature, 6);
+tx.SetCustomTaxRate(Commodity.Literature, 3);
+tx.SetCustomTaxRate(Commodity.Transport, 3);
+tx.SetCustomTaxRate(Commodity.Alcohol, 6);
+tx.SetCustomTaxRate(Commodity.Default, 6);
+tx.SetCustomTaxRate(Commodity.FoodServices, 9);
+tx.SetCustomTaxRate(Commodity.Food, 9);
 //tx.SetCustomTaxRate(Commodity.CulturalServices, 10);
 
 foreach (var kvp in TaxCalculator._customRates)

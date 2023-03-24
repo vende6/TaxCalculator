@@ -81,15 +81,14 @@ namespace TaxCalculatorInterviewTests
         {
             for (var x = 0; x <= _customRates.Where(x => x.Item1 == commodity && x.Item2 == date).Count(); x++)
             {
-                if (x != null)
-                {
+
                     var item = _customRates.ElementAtOrDefault(x);
                     var next = _customRates.ElementAtOrDefault(x + 1);
                     if (item.Item2 >= DateTime.Now && item.Item1 <= next.Item1)
                     {
                         return item.Item3;
                     }
-                }
+                
             }
             return GetStandardTaxRate(commodity);
         }
