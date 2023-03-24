@@ -85,7 +85,7 @@ namespace TaxCalculatorInterviewTests
                 var next = _customRates.ElementAtOrDefault(x + 1);
                 if (item.Item2 >= DateTime.Now && item.Item1 <= next.Item1)
                 {
-                    return item.Item2;
+                    return item.Item3;
                 }
             }
             return GetStandardTaxRate(commodity);
